@@ -7,4 +7,13 @@ export class AuthService {
         error => console.log(error)
       );
   }
+
+  signinUser(email: string, psd: string) {
+    firebase.auth().signInWithEmailAndPassword(email, psd)
+      .then(
+        response => console.log(response)
+      ).catch(
+        error => console.log(error)
+    );
+  }
 }
