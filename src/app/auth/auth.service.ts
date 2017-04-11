@@ -1,7 +1,12 @@
 import * as firebase from 'firebase';
+import {Router} from '@angular/router';
+import {Injectable} from '@angular/core';
 
+@Injectable()
 export class AuthService {
   token: string;
+
+  constructor(private router: Router) {}
 
   signupUser(email: string, psd: string) {
     firebase.auth().createUserWithEmailAndPassword(email, psd)
@@ -14,6 +19,7 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, psd)
       .then(
         response => {
+          this.router.navigate(['/']);
           firebase.auth().currentUser.getToken()
             .then(
               (token: string) => this.token = token
